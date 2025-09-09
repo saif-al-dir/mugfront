@@ -1,0 +1,20 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set base font and background */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #a49a9a44;
+  color: #222;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Make sure root and html take full height */
+html, #root {
+  height: 100%;
+}

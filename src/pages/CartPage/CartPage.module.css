@@ -1,0 +1,191 @@
+.container {
+  max-width: 900px;
+  margin: 100px auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #a8a7a752;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.1);
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.backLink {
+  display: inline-block;
+  margin-top: 20px;
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.cartTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cartTable th,
+.cartTable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.cartTable th {
+  background-color: #f8f8f8;
+  font-weight: 700;
+  color: #333;
+}
+
+.productLink {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.productLink:hover {
+  text-decoration: underline;
+}
+
+.quantityInput {
+  width: 40px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: center;
+}
+
+.descriptionInput {
+  width: 90%;
+  padding: 6px 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.removeButton {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+  background-color: #a71d2a;
+}
+
+.total {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  text-align: right;
+  color: #222;
+}
+
+.orderButton {
+  background-color: #28a745;
+  border: none;
+  color: white;
+  padding: 12px 0;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.orderButton:hover {
+  background-color: #1e7e34;
+}
+
+/* Existing styles ... */
+
+@media (max-width: 768px) {
+  .container {
+    margin: 60px 10px;
+    padding: 10px;
+  }
+
+  .cartTable {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cartTable thead,
+  .cartTable tbody,
+  .cartTable th,
+  .cartTable td,
+  .cartTable tr {
+    display: block;
+  }
+
+  .cartTable thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  .cartTable tr {
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
+  .cartTable td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
+    text-align: left;
+  }
+
+  .cartTable td::before {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 45%;
+    white-space: nowrap;
+    font-weight: 700;
+    color: #333;
+  }
+
+  /* Label each cell */
+  .cartTable td:nth-of-type(1)::before { content: "Product"; }
+  .cartTable td:nth-of-type(2)::before { content: "Price (zł)"; }
+  .cartTable td:nth-of-type(3)::before { content: "Quantity"; }
+  .cartTable td:nth-of-type(4)::before { content: "Description"; }
+  .cartTable td:nth-of-type(5)::before { content: "Subtotal (zł)"; }
+  .cartTable td:nth-of-type(6)::before { content: "Remove"; }
+
+  .quantityInput {
+    width: 60px;
+  }
+
+  .descriptionInput {
+    width: 100%;
+  }
+
+  .orderButton {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  .total {
+    text-align: center;
+    font-size: 1.2rem;
+  }
+}
