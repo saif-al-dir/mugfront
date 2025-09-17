@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminLogin.module.css';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL || 'https://mugback.aldiresee.com';
 
 export default function AdminLogin () {
   const [username, setUsername] = useState('');
