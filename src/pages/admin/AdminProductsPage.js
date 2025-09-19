@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './AdminProductsPage.module.css';
-import axiosInstance from '../../api/axiosInstance';
 import LogoutButton from '../../components/LogoutButton';
+import api from '../../api/axiosInstance';
+
 
 export default function AdminProductsPage () {
   const [products, setProducts] = useState([]);
@@ -10,7 +11,7 @@ export default function AdminProductsPage () {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axiosInstance.get('/api/products')
+    api.get('/products')
       .then(res => setProducts(res.data))
       .catch(() => setError('Failed to load products'));
   }, []);
@@ -18,7 +19,7 @@ export default function AdminProductsPage () {
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
     try {
-      await axiosInstance.delete(`/api/products/${id}`); // ✅ no API_URL
+      await api.delete(`/products/${id}`); // ✅ no API_URL
       setProducts(products.filter((p) => p.id !== id));
     } catch (err) {
       alert('Failed to delete product');

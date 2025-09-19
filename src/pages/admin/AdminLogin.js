@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminLogin.module.css';
-
-const API_URL = process.env.REACT_APP_API_URL;
+import api from '../../api/axiosInstance';
 
 export default function AdminLogin () {
   const [username, setUsername] = useState('');
@@ -15,7 +13,7 @@ export default function AdminLogin () {
     e.preventDefault();
     setError(null);
     try {
-      const res = await axios.post(`${API_URL}/api/auth/login`, { username, password });
+      const res = await api.post(`/auth/login`, { username, password });
       localStorage.setItem('token', res.data.access_token);
       navigate('/admin/products');
     } catch {

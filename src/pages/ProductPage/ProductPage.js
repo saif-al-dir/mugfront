@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../../api/axiosInstance';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../store/cartSlice';
 import Slider from 'react-slick';
@@ -21,7 +22,7 @@ const ProductPage = () => {
         const fetchProduct = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`/api/products/${id}`);
+                const response = await api.get(`/products/${id}`);
                 setProduct(response.data);
                 setLoading(false);
             } catch (err) {

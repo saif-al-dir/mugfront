@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import styles from './AdminProductForm.module.css';
-import axiosInstance from '../../api/axiosInstance';
+import api from '../../api/axiosInstance';
+
 
 export default function AdminProductForm () {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function AdminProductForm () {
 
   useEffect(() => {
     if (isEdit) {
-      axiosInstance.get(`/api/products/${id}`)
+      api.get(`/products/${id}`)
         .then(res => setProduct(res.data))
         .catch(() => setError('Load failed'));
     }
@@ -27,9 +28,9 @@ export default function AdminProductForm () {
     e.preventDefault();
     try {
       if (isEdit) {
-        await axiosInstance.put(`/api/products/${id}`, product);
+        await api.put(`/products/${id}`, product);
       } else {
-        await axiosInstance.post('/api/products', product);
+        await api.post('/products', product);
       }
       navigate('/admin/products');
     } catch {

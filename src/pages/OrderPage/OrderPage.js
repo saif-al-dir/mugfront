@@ -55,7 +55,7 @@ const OrderPage = () => {
         createdAt: new Date().toISOString(),
       };
 
-      await axios.post('/api/orders', orderData);
+      await axios.post('https://mugback.aldiresee.com/api/orders', orderData);
 
       dispatch(clearCart());
 
