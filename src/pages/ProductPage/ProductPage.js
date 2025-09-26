@@ -8,6 +8,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import styles from './ProductPage.module.css';
+import { useHead } from '../../hooks/useHead';
 
 const ProductPage = () => {
     const { id } = useParams();
@@ -17,6 +18,15 @@ const ProductPage = () => {
     const [error, setError] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const headElements = [
+        'Product Page', // Sets <title>
+        {
+          tag: 'meta',
+          props: { name: 'description', content: 'Page description' }
+        }
+      ];
+      useHead(headElements);
 
     useEffect(() => {
         const fetchProduct = async () => {

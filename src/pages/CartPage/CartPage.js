@@ -7,11 +7,21 @@ import {
 } from '../../store/cartSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './CartPage.module.css';
+import { useHead } from '../../hooks/useHead';
 
 const CartPage = () => {
     const cartItems = useSelector((state) => state.cart.items);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const headElements = [
+        'Cart Page', // Sets <title>
+        {
+            tag: 'meta',
+            props: { name: 'description', content: 'Page description' }
+        }
+    ];
+    useHead(headElements);
 
     const handleQuantityChange = (productId, value) => {
         const quantity = Math.max(1, Number(value));

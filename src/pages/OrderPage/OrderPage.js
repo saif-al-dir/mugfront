@@ -6,11 +6,21 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './OrderPage.module.css';
+import { useHead } from '../../hooks/useHead';
 
 const OrderPage = () => {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const headElements = [
+    'Order Page', // Sets <title>
+    {
+      tag: 'meta',
+      props: { name: 'description', content: 'Page description' }
+    }
+  ];
+  useHead(headElements);
 
   const [formData, setFormData] = useState({
     name: '',

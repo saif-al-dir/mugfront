@@ -2,12 +2,22 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './AdminLogin.module.css';
 import api from '../../api/axiosInstance';
+import { useHead } from '../../hooks/useHead';
 
 export default function AdminLogin () {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const headElements = [
+    'Admin Login Page', // Sets <title>
+    {
+      tag: 'meta',
+      props: { name: 'description', content: 'Page description' }
+    }
+  ];
+  useHead(headElements);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

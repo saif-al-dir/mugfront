@@ -4,6 +4,7 @@ import { fetchProducts } from '../../store/productsSlice';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
 import Hero from '../../components/Hero';
+import { useHead } from '../../hooks/useHead';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,22 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
 
+
+  const headElements = [
+    'Home Page', // Sets <title>
+    {
+      tag: 'meta',
+      props: { name: 'description', content: 'Page description' }
+    }
+  ];
+  useHead(headElements);
+
   // Update productsPerPage based on window width
   useEffect(() => {
     const updateProductsPerPage = () => {
       if (window.innerWidth < 925) {
         setProductsPerPage(6);
-      } else if (window.innerWidth < 1122){
+      } else if (window.innerWidth < 1122) {
         setProductsPerPage(8);
       } else {
         setProductsPerPage(10);
@@ -41,14 +52,14 @@ const HomePage = () => {
   // Calculate total pages based on productsPerPage
   const totalPages = Math.ceil(products.length / productsPerPage);
 
-   // Ensure currentPage is not out of range if productsPerPage changes
+  // Ensure currentPage is not out of range if productsPerPage changes
   useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(totalPages || 1);
     }
   }, [productsPerPage, totalPages, currentPage]);
 
-    if (status === 'loading') {
+  if (status === 'loading') {
     return <div className={styles.container}>Loading products...</div>;
   }
 
