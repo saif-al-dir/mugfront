@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../../store/cartSlice';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
+import api from '../../api/axiosInstance';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from './OrderPage.module.css';
@@ -46,6 +47,11 @@ const OrderPage = () => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
+  const totalPrice = cartItems.reduce((sum, item) => {
+    const price = item.product.salePrice ?? item.product.price; // ✅ fallback
+    return sum + price * item.quantity;
+  }, 0);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -57,15 +63,13 @@ const OrderPage = () => {
           productId: product.id,
           quantity,
           description,
+          price: product.salePrice ?? product.price, // ✅ include correct price
         })),
-        totalPrice: cartItems.reduce(
-          (sum, item) => sum + item.product.price * item.quantity,
-          0
-        ),
+        totalPrice, // ✅ uses salePrice if available
         createdAt: new Date().toISOString(),
       };
 
-      await axios.post('https://mugback.aldiresee.com/api/orders', orderData);
+      await api.post('/orders', orderData);
 
       dispatch(clearCart());
 
@@ -78,7 +82,6 @@ const OrderPage = () => {
         draggable: true,
       });
 
-      // Delay navigation so user can see toast
       setTimeout(() => {
         navigate('/');
       }, 3500);
@@ -100,17 +103,32 @@ const OrderPage = () => {
     <div className={styles.container}>
       <h1>Order Summary</h1>
       <div className={styles.summary}>
-        {cartItems.map(({ product, quantity, description }) => (
-          <div key={product.id} className={styles.summaryItem}>
-            <div>
-              <strong>{product.title}</strong> x {quantity}
+        {cartItems.map(({ product, quantity, description }) => {
+          const price = product.salePrice ?? product.price; // ✅ fallback
+          return (
+            <div key={product.id} className={styles.summaryItem}>
+              <div>
+                <strong>{product.title}</strong> x {quantity}
+              </div>
+              <div>Description: {description || 'None'}</div>
+              <div>
+                Price:{' '}
+                {product.salePrice ? (
+                  <>
+                    <span className={styles.oldPrice}>{product.price} zł</span>{' '}
+                    <span className={styles.salePrice}>
+                      {(product.salePrice * quantity).toFixed(2)} zł
+                    </span>
+                  </>
+                ) : (
+                  <span>{(price * quantity).toFixed(2)} zł</span>
+                )}
+              </div>
             </div>
-            <div>Description: {description || 'None'}</div>
-            <div>Price: {(product.price * quantity).toFixed(2)} zł</div>
-          </div>
-        ))}
+          );
+        })}
         <div className={styles.total}>
-          Total: {cartItems.reduce((sum, item) => sum + item.product.price * item.quantity, 0).toFixed(2)} zł
+          Total: {totalPrice.toFixed(2)} zł
         </div>
       </div>
 

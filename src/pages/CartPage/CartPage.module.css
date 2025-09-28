@@ -189,3 +189,14 @@ h1 {
     font-size: 1.2rem;
   }
 }
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 8px;
+}
+
+.salePrice {
+  color: #e60023;
+  font-weight: bold;
+}

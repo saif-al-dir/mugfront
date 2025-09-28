@@ -5,7 +5,7 @@ import LogoutButton from '../../components/LogoutButton';
 import api from '../../api/axiosInstance';
 
 
-export default function AdminProductsPage () {
+export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -40,15 +40,17 @@ export default function AdminProductsPage () {
             <th>ID</th>
             <th>Title</th>
             <th>Price (zł)</th>
+            <th>Sale Price (zł)</th> {/* new column */}
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {products.map(({ id, title, price }) => (
+          {products.map(({ id, title, price, salePrice }) => (
             <tr key={id}>
               <td>{id}</td>
               <td>{title}</td>
               <td>{price}</td>
+              <td>{salePrice ?? '-'}</td> {/* show dash if null */}
               <td>
                 <button
                   onClick={() => navigate(`/admin/products/${id}/edit`)}
@@ -67,7 +69,7 @@ export default function AdminProductsPage () {
           ))}
           {products.length === 0 && (
             <tr>
-              <td colSpan="4" style={{ textAlign: 'center' }}>
+              <td colSpan="5" style={{ textAlign: 'center' }}>
                 No products found.
               </td>
             </tr>

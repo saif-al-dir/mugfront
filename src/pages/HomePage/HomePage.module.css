@@ -54,6 +54,7 @@
 }
 
 .productPrice {
+  /* text-decoration: line-through; */
   font-weight: 600;
   color: #007bff;
   margin-bottom: 15px;
@@ -100,4 +101,15 @@
   color: #007bff;
   font-weight: bold;
   cursor: default;
+}
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 8px;
+}
+
+.salePrice {
+  color: #e60023;
+  font-weight: bold;
 }

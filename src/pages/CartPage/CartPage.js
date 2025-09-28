@@ -37,7 +37,10 @@ const CartPage = () => {
     };
 
     const totalPrice = cartItems.reduce(
-        (sum, item) => sum + item.product.price * item.quantity,
+        (sum, item) => {
+            const price = item.product.salePrice ?? item.product.price;
+            return sum + price * item.quantity;
+        },
         0
     );
 
@@ -56,7 +59,7 @@ const CartPage = () => {
         );
     }
 
-    return (
+   return (
         <div className={styles.container}>
             <h1>Your Cart</h1>
             <table className={styles.cartTable}>
@@ -71,44 +74,56 @@ const CartPage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {cartItems.map(({ product, quantity, description }) => (
-                        <tr key={product.id}>
-                            <td>
-                                <Link to={`/product/${product.id}`} className={styles.productLink}>
-                                    {product.title}
-                                </Link>
-                            </td>
-                            <td>{product.price}</td>
-                            <td>
-                                <input
-                                    type="number"
-                                    min="1"
-                                    value={quantity}
-                                    onChange={(e) => handleQuantityChange(product.id, e.target.value)}
-                                    className={styles.quantityInput}
-                                />
-                            </td>
-                            <td>
-                                <input
-                                    type="text"
-                                    value={description}
-                                    onChange={(e) => handleDescriptionChange(product.id, e.target.value)}
-                                    placeholder="Add description"
-                                    className={styles.descriptionInput}
-                                />
-                            </td>
-                            <td>{(product.price * quantity).toFixed(2)}</td>
-                            <td>
-                                <button
-                                    onClick={() => handleRemove(product.id)}
-                                    className={styles.removeButton}
-                                    aria-label={`Remove ${product.title} from cart`}
-                                >
-                                    &times;
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
+                    {cartItems.map(({ product, quantity, description }) => {
+                        const price = product.salePrice ?? product.price; // ✅ fallback logic
+                        return (
+                            <tr key={product.id}>
+                                <td>
+                                    <Link to={`/product/${product.id}`} className={styles.productLink}>
+                                        {product.title}
+                                    </Link>
+                                </td>
+                                <td>
+                                    {product.salePrice ? (
+                                        <>
+                                            <span className={styles.oldPrice}>{product.price} zł</span>{' '}
+                                            <span className={styles.salePrice}>{product.salePrice} zł</span>
+                                        </>
+                                    ) : (
+                                        <span>{product.price} zł</span>
+                                    )}
+                                </td>
+                                <td>
+                                    <input
+                                        type="number"
+                                        min="1"
+                                        value={quantity}
+                                        onChange={(e) => handleQuantityChange(product.id, e.target.value)}
+                                        className={styles.quantityInput}
+                                    />
+                                </td>
+                                <td>
+                                    <input
+                                        type="text"
+                                        value={description}
+                                        onChange={(e) => handleDescriptionChange(product.id, e.target.value)}
+                                        placeholder="Add description"
+                                        className={styles.descriptionInput}
+                                    />
+                                </td>
+                                <td>{(price * quantity).toFixed(2)}</td>
+                                <td>
+                                    <button
+                                        onClick={() => handleRemove(product.id)}
+                                        className={styles.removeButton}
+                                        aria-label={`Remove ${product.title} from cart`}
+                                    >
+                                        &times;
+                                    </button>
+                                </td>
+                            </tr>
+                        );
+                    })}
                 </tbody>
             </table>
             <div className={styles.total}>

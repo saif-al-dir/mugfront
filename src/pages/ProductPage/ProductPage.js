@@ -22,11 +22,11 @@ const ProductPage = () => {
     const headElements = [
         'Product Page', // Sets <title>
         {
-          tag: 'meta',
-          props: { name: 'description', content: 'Page description' }
+            tag: 'meta',
+            props: { name: 'description', content: 'Page description' }
         }
-      ];
-      useHead(headElements);
+    ];
+    useHead(headElements);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -84,7 +84,18 @@ const ProductPage = () => {
                 </div>
                 <div className={styles.detailsSection}>
                     <h2 className={styles.title}>{product.title}</h2>
-                    <p className={styles.price}>Price: {product.price} zł</p>
+
+
+                    {/* ✅ Show sale price if available */}
+                    {product.salePrice ? (
+                        <p className={styles.price}>
+                            <span className={styles.oldPrice}>{product.price} zł</span>
+                            <span className={styles.salePrice}>{product.salePrice} zł</span>
+                        </p>
+                    ) : (
+                        <p className={styles.price}>Price: {product.price} zł</p>
+                    )}
+
                     <p className={styles.description}>{product.description}</p>
                     <div className={styles.quantityWrapper}>
                         <label htmlFor="quantity">Quantity:</label>

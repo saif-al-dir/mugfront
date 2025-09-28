@@ -117,3 +117,14 @@ textarea {
 .productCard {
   animation: fadeIn 0.5s ease forwards;
 }
+
+.oldPrice {
+  text-decoration: line-through;
+  color: #888;
+  margin-right: 8px;
+}
+
+.salePrice {
+  color: #e60023;
+  font-weight: bold;
+}

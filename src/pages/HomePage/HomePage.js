@@ -17,7 +17,7 @@ const HomePage = () => {
 
 
   const headElements = [
-    'Home Page', // Sets <title>
+    'Mugstore Home Page', // Sets <title>
     {
       tag: 'meta',
       props: { name: 'description', content: 'Page description' }
@@ -103,7 +103,17 @@ const HomePage = () => {
             />
             <div className={styles.productInfo}>
               <h3 className={styles.productTitle}>{product.title}</h3>
-              <p className={styles.productPrice}>From {product.price} zł</p>
+              
+
+              {product.salePrice ? (
+                <p className={styles.price}>
+                  <span className={styles.oldPrice}>{product.price} zł</span>
+                  <span className={styles.salePrice}>{product.salePrice} zł</span>
+                </p>
+              ) : (
+                  <p className={styles.productPrice}>From {product.price} zł</p>
+              )}
+
               <Link to={`/product/${product.id}`}>
                 <button className={styles.viewButton}>View Product</button>
               </Link>
