@@ -117,15 +117,14 @@
 
   .navLinks {
     position: fixed;
-    
-    /* display: flex; */
+    display: flex;
     top: 60px;
     right: 0;
     height: 60px;
     width: calc(100%);
     background-color: #007bff;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     padding: 20px;
     gap: 23px;
     transform: translateX(100%);
@@ -145,4 +144,64 @@
     top: 1;
     right: -20px;
   }
+}
+
+/* Light theme styles */
+/* .lightNav {
+  background: #5b92a651;
+  color: #000000;
+}
+
+.lightNav a {
+  color: #333;
+} */
+
+/* Dark theme styles */
+.darkNav {
+  background: #121212;
+  color: #ffffff;
+  border-radius: 5px;
+}
+
+.darkNav a {
+  color: #f5f5f5;
+}
+
+/* Light theme */
+.lightHamburger .bar,
+.lightHamburger .barActive,
+.lightBar {
+  background-color: #333; /* dark lines for light background */
+}
+
+/* Dark theme */
+.darkHamburger .bar,
+.darkHamburger .barActive,
+.darkBar {
+  background-color: #fff; /* white lines for dark background */
+}
+
+/* Light theme menu */
+.lightMenu {
+  background-color: #007bfff6;
+  color: #333;
+}
+
+/* Dark theme menu */
+.darkMenu {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+/* Link overrides inside menus */
+.lightMenu a {
+  color: #333;
+}
+
+.darkMenu a {
+  color: #f5f5f5;
+}
+
+.darkMenu a:hover {
+  color: #ffcc00; /* nice accent color */
 }

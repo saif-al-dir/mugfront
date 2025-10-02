@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProducts } from '../../store/productsSlice';
 import { Link } from 'react-router-dom';
 import styles from './HomePage.module.css';
 import Hero from '../../components/Hero';
 import { useHead } from '../../hooks/useHead';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -15,9 +16,10 @@ const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
 
+  const { theme } = useContext(ThemeContext);
 
   const headElements = [
-    'Mugstore Home Page', // Sets <title>
+    'Mugstore Home Page',
     {
       tag: 'meta',
       props: { name: 'description', content: 'Page description' }
@@ -25,7 +27,6 @@ const HomePage = () => {
   ];
   useHead(headElements);
 
-  // Update productsPerPage based on window width
   useEffect(() => {
     const updateProductsPerPage = () => {
       if (window.innerWidth < 925) {
@@ -37,8 +38,7 @@ const HomePage = () => {
       }
     };
 
-    updateProductsPerPage(); // initial check
-
+    updateProductsPerPage();
     window.addEventListener('resize', updateProductsPerPage);
     return () => window.removeEventListener('resize', updateProductsPerPage);
   }, []);
@@ -49,10 +49,8 @@ const HomePage = () => {
     }
   }, [status, dispatch]);
 
-  // Calculate total pages based on productsPerPage
   const totalPages = Math.ceil(products.length / productsPerPage);
 
-  // Ensure currentPage is not out of range if productsPerPage changes
   useEffect(() => {
     if (currentPage > totalPages) {
       setCurrentPage(totalPages || 1);
@@ -67,11 +65,9 @@ const HomePage = () => {
     return <div className={styles.container}>Error: {error}</div>;
   }
 
-  // Get products for current page
   const startIndex = (currentPage - 1) * productsPerPage;
   const currentProducts = products.slice(startIndex, startIndex + productsPerPage);
 
-  // Render pagination dots
   const renderDots = () => {
     const dots = [];
     for (let i = 1; i <= totalPages; i++) {
@@ -90,39 +86,40 @@ const HomePage = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <>
       <Hero />
-      <h1 className={styles.title}>Our Products</h1>
-      <div className={styles.productsGrid}>
-        {currentProducts.map((product) => (
-          <div key={product.id} className={styles.productCard}>
-            <img
-              src={product.image}
-              alt={product.title}
-              className={styles.productImage}
-            />
-            <div className={styles.productInfo}>
-              <h3 className={styles.productTitle}>{product.title}</h3>
-              
-
-              {product.salePrice ? (
-                <p className={styles.price}>
-                  <span className={styles.oldPrice}>{product.price} zł</span>
-                  <span className={styles.salePrice}>{product.salePrice} zł</span>
-                </p>
-              ) : (
+      <div className={`${styles.container} ${theme === 'light' ? styles.lightContainer : styles.darkContainer}`}>
+        <h1 className={styles.title}>Our Products</h1>
+        <div className={styles.productsGrid}>
+          {currentProducts.map((product) => (
+            <div key={product.id} className={styles.productCard}>
+              <img
+                src={product.image}
+                alt={product.title}
+                className={styles.productImage}
+              />
+              <div className={styles.productInfo}>
+                <h3 className={styles.productTitle}>{product.title}</h3>
+      
+                {product.salePrice ? (
+                  <p className={styles.price}>
+                    <span className={styles.oldPrice}>{product.price} zł</span>
+                    <span className={styles.salePrice}>{product.salePrice} zł</span>
+                  </p>
+                ) : (
                   <p className={styles.productPrice}>From {product.price} zł</p>
-              )}
-
-              <Link to={`/product/${product.id}`}>
-                <button className={styles.viewButton}>View Product</button>
-              </Link>
+                )}
+      
+                <Link to={`/product/${product.id}`}>
+                  <button className={styles.viewButton}>View Product</button>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className={styles.pagination}>{renderDots()}</div>
       </div>
-      <div className={styles.pagination}>{renderDots()}</div>
-    </div>
+    </>
   );
 };
 

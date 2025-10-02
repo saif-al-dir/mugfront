@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styles from './Hero.module.css';
+import { ThemeContext } from '../context/ThemeContext';
 
 const images = [
   '/hero-bg1.jpg',
@@ -10,20 +11,21 @@ const images = [
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === images.length - 1 ? 0 : prevIndex + 1
       );
-    }, 5000); // Change image every 5 seconds
+    }, 5000);
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section
-      className={styles.hero}
+      className={`${styles.hero} ${theme === 'light' ? styles.lightTheme : styles.darkTheme}`}
       style={{
         backgroundImage: `url(${images[currentIndex]})`,
       }}

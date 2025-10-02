@@ -12,9 +12,27 @@ body {
   color: #222;
   line-height: 1.6;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 /* Make sure root and html take full height */
 html, #root {
   height: 100%;
 }
+
+/* Light theme (default) */
+body.light {
+  background-color: #e7e5e5;
+  color: #000000;
+}
+
+/* Dark theme */
+body.dark {
+  background-color: #1e1e1e;
+  color: #fffdfd;
+}
+
+/* Example for specific elements */
+/* body.dark a {
+  color: #80b3ff;
+} */

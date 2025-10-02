@@ -51,3 +51,13 @@
     text-align: center;
   }
 }
+
+.lightFooter {
+  background: #f9f9f9;
+  color: #222;
+}
+
+.darkFooter {
+  background: #111;
+  color: #ddd;
+}
