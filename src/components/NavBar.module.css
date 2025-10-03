@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #007bfff6;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 3px;
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   position: relative;
@@ -21,11 +21,11 @@
 
 .logoIcon {
   font-size: 1.8rem;
-  color: rgb(237, 240, 242);
+  color: #040404;
 }
 
 .logoLink {
-  color: white;
+  color: #040404;
   font-weight: 700;
   font-size: 1.5rem;
   text-decoration: none;
@@ -41,7 +41,7 @@
 }
 
 .navLinks li a {
-  color: white;
+  color: #121212;
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
@@ -136,7 +136,7 @@
   }
 
   .navLinks li a {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
 
   /* Adjust cart badge position for mobile */
@@ -145,16 +145,6 @@
     right: -20px;
   }
 }
-
-/* Light theme styles */
-/* .lightNav {
-  background: #5b92a651;
-  color: #000000;
-}
-
-.lightNav a {
-  color: #333;
-} */
 
 /* Dark theme styles */
 .darkNav {
@@ -167,19 +157,38 @@
   color: #f5f5f5;
 }
 
+.darkNav .logoIcon {
+  color: white;
+}
+
+.darkNav .navLinks li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.darkNav .navLinks li a:hover {
+  color: #ffcc00;
+}
+
 /* Light theme */
 .lightHamburger .bar,
 .lightHamburger .barActive,
 .lightBar {
-  background-color: #333; /* dark lines for light background */
+  background-color: #040404;
 }
 
 /* Dark theme */
 .darkHamburger .bar,
 .darkHamburger .barActive,
 .darkBar {
-  background-color: #fff; /* white lines for dark background */
+  background-color: #fff;
 }
+
+
 
 /* Light theme menu */
 .lightMenu {
@@ -203,5 +212,6 @@
 }
 
 .darkMenu a:hover {
-  color: #ffcc00; /* nice accent color */
+  color: #ffcc00;
 }
+

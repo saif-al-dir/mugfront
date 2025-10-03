@@ -66,7 +66,7 @@ const NavBar = () => {
   </li>
   <li>
     <NavLink to="/admin/products" className={({ isActive }) => isActive ? styles.active : ''} onClick={closeMenu}>
-      Admin
+      Login
     </NavLink>
   </li>
 </ul>

@@ -16,7 +16,7 @@ const ThemeToggle = () => {
       }}
       aria-label="Toggle theme"
     >
-      {theme === 'light' ? <FaMoon style={{color: '#011ad8ff'}}/>
+      {theme === 'light' ? <FaMoon style={{color: '#0034ddff'}}/>
                         : <FaSun style={{color: '#d1d801ff'}}/>}
     </button>
   );

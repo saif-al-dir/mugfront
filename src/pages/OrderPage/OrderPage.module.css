@@ -18,7 +18,8 @@ h1 {
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: #b9b8b8;
+  color: rgb(7, 7, 7);
 }
 
 .summaryItem {

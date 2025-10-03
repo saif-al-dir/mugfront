@@ -11,7 +11,7 @@ export default function AdminLogin () {
   const navigate = useNavigate();
 
   const headElements = [
-    'Admin Login Page', // Sets <title>
+    'Login Page', // Sets <title>
     {
       tag: 'meta',
       props: { name: 'description', content: 'Page description' }
@@ -33,7 +33,6 @@ export default function AdminLogin () {
 
   return (
     <div className={styles.container}>
-      <h1>Admin Login</h1>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label>
           Username:
