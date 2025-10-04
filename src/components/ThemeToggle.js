@@ -12,7 +12,9 @@ const ThemeToggle = () => {
         background: 'transparent',
         border: 'none',
         cursor: 'pointer',
-        fontSize: '1.3rem',
+        fontSize: '1.7rem',
+        marginLeft: 30,
+        marginTop: 5,
       }}
       aria-label="Toggle theme"
     >

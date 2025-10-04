@@ -34,6 +34,8 @@
 }
 
 .productImage {
+  /* width: 100%; */
+  /* height: 160px; */
   object-fit: cover;
 }
 
@@ -53,6 +55,7 @@
 }
 
 .productPrice {
+  /* text-decoration: line-through; */
   font-weight: 600;
   color: #007bff;
   margin-bottom: 15px;

@@ -21,10 +21,12 @@ const NavBar = () => {
   return (
     <nav className={`${styles.navbar} ${theme === 'light' ? styles.lightNav : styles.darkNav}`}>
       <div className={styles.logo}>
-        <FaMugHot className={styles.logoIcon} />
+        <ThemeToggle />
+        
         <NavLink to="/" className={styles.logoLink} onClick={closeMenu}>
           MugStore
         </NavLink>
+        <FaMugHot className={styles.logoIcon} />
       </div>
 
       <button
@@ -45,7 +47,6 @@ const NavBar = () => {
     ${theme === 'light' ? styles.lightMenu : styles.darkMenu}
   `}
 >
-  <li><ThemeToggle /></li>
   <li>
     <NavLink to="/" className={({ isActive }) => isActive ? styles.active : ''} onClick={closeMenu}>
       Home

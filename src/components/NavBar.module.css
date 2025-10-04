@@ -22,6 +22,7 @@
 .logoIcon {
   font-size: 1.8rem;
   color: #040404;
+  margin-bottom: 9px;
 }
 
 .logoLink {
@@ -136,7 +137,7 @@
   }
 
   .navLinks li a {
-    font-size: 1rem;
+    font-size: 1.2rem;
   }
 
   /* Adjust cart badge position for mobile */
@@ -145,6 +146,16 @@
     right: -20px;
   }
 }
+
+/* Light theme styles */
+/* .lightNav {
+  background: #5b92a651;
+  color: #000000;
+}
+
+.lightNav a {
+  color: #333;
+} */
 
 /* Dark theme styles */
 .darkNav {
@@ -178,14 +189,14 @@
 .lightHamburger .bar,
 .lightHamburger .barActive,
 .lightBar {
-  background-color: #040404;
+  background-color: #040404; /* dark lines for light background */
 }
 
 /* Dark theme */
 .darkHamburger .bar,
 .darkHamburger .barActive,
 .darkBar {
-  background-color: #fff;
+  background-color: #fff; /* white lines for dark background */
 }
 
 
@@ -212,6 +223,6 @@
 }
 
 .darkMenu a:hover {
-  color: #ffcc00;
+  color: #ffcc00; /* nice accent color */
 }
 
